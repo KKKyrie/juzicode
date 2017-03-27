@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8">
+		<link rel="icon" href="favicon.ico">
+		<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+		<script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+		<link href="style/main.css" rel="stylesheet" type="text/css">
+		<link type="text/css" href="lib/codemirror.css" rel="stylesheet" />
+		<script type="text/javascript" src="lib/codemirror.js"></script>
+		<script type="text/javascript" src="mode/sql/sql.js"></script>
+		<script src="http://www.iteye.com/javascripts/syntaxhighlighter/shCoreCommon.js?1238329845" type="text/javascript"></script>
+		<!-- syntaxhighlighter -->
+		<link rel="stylesheet" type="text/css" href="lib/shCore.css"/>
+		<link rel="stylesheet" type="text/css" href="lib/shCoreDefault.css"/>
+		<script type="text/javascript" src="lib/shCore.js"></script>
+		<script type="text/javascript" src="lib/shAutoloader.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>桔子Code</title>
+	</head>
+	<body>
+		<div id="app">
+			<div class="placeholder"></div>
+			<div class="header">
+				<div class="title" >
+					<img src="favicon.ico"/>
+					<router-link to="/"><h1 class="title-text">Juzi Code</h1></router-link>
+				</div>
+				<ul class="router">
+					<li class="address"><router-link to="/">主页</router-link></li>
+					<li class="address"><router-link to="/notice">消息</router-link></li>
+					<li class="address"><router-link to="/user">个人</router-link></li>
+					<li class="name"><router-link to="/user">someone</router-link></li>
+				</ul>
+				<!-- <p class="name">username</p>	 -->
+			</div>
+			<router-view></router-view>
+			<div class="footer"></div>
+		</div>
+
+		<!-- if mobile? start -->
+		<script>
+			function isPhone() {
+			    var flag = false;
+			    var userAgentInfo = navigator.userAgent;
+			    var Agents = ["Android", "iPhone", "SymbianOS", "Windows Phone", "iPad", "iPod"];
+			    for (var i = 0; i < Agents.length; i++) {
+			        if (userAgentInfo.indexOf(Agents[i]) > 0) {
+			            flag = true;
+			            break;
+			        }
+			    }
+			    return flag;
+			}
+
+			if (isPhone()){
+				$('body').html('<img src="m-hint.png" class="hint" />');
+			}
+		</script>
+		<!-- if mobile? ends -->
+
+		<script src="lib/jbase64.js"></script>
+		<script src='./dist/bundle.js'></script>
+		
+		<!-- code mirror init (bug) -->
+		<script>
+			$(document).ready(function(){
+				SyntaxHighlighter.autoloader(
+					['js','jscript','javascript','lib/shBrushJScript.js'],
+					['bash','shell','lib/shBrushBash.js'],
+					['css','lib/shBrushCss.js'],
+					['xml','html','lib/shBrushXml.js'],
+					['sql','lib/shBrushSql.js'],
+					['php','lib/shBrushPhp.js'],
+					['cpp','lib/shBrushCpp.js'],
+					['java','lib/shBrushJava.js']
+				);
+			SyntaxHighlighter.all();
+			});
+		</script>
+	</body>
+</html>
